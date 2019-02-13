@@ -1,5 +1,17 @@
 #Functions used for deployments of various types.
 
+function LoginCheck {
+    $accinfo = az account show
+
+    while (!$accinfo) {
+        Write-Host "Please login to Azure"
+        az login
+    }       
+
+    Write-Host "You are currently logged into:"
+    Write-Host $accinfo`n
+}
+
 function DeployVM {
     $vmuser = Read-Host "Enter username for VM:"
     $vmpass = Read-Host "Enter password for VM:" -AsSecureString

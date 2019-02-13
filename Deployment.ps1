@@ -1,5 +1,5 @@
 #Simple test script for deployment of server VM
-#Based on the new AZ Powershell module.
+#Based on the new Azure CLI Powershell module.
 Param(
     [string] $vmName = "myTestVM",
     [string] $Location = "West Europe",
@@ -11,23 +11,17 @@ Param(
 
 )
 
+#Importing the functions
 . $PSScriptRoot\Deployment-functions.ps1
 
-#Test for existing login session
-$accinfo = az account show
-
-while (!$accinfo) {
-    Write-Host "Please login to Azure"
-    az login
-}
-
-Write-Host "You are currently logged into:"
-Write-Host $accinfo`n
+#Check for currently logged in Azure account/subscription
+LoginCheck
 
 $confirmation = Read-Host "Is this the correct account / subscription?"
 if ($confirmation -eq 'y' -or $confirmation -eq 'yes') {
     Write-Host "Beginning deployment...`n"
 
+    #Creation of resources
     CreateRG
     DeployVM
     
