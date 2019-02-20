@@ -23,7 +23,7 @@ if ($confirmation -eq 'y' -or $confirmation -eq 'yes') {
 
     #Creation of resources
     CreateRG
-    DeployVM
+    #DeployVM
     
     Write-Host "Deployment complete"
 }

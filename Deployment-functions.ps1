@@ -16,10 +16,21 @@ function DeployVM {
     $vmuser = Read-Host "Enter username for VM:"
     $vmpass = Read-Host "Enter password for VM:" -AsSecureString
     Write-Host "Deploying VM"
-    az vm create -n $vmName -g $ResourceGroupName -l $Location --image $image --admin-username $vmuser --admin-password $vmpass -o none
+    az vm create,
+        --name $vmName,
+        --group $ResourceGroupName,
+        --location $Location,
+        --image $image,
+        --admin-username $vmuser,
+        --admin-password $vmpass,
+        --output none
 }
 
 function CreateRG {
     Write-Host "Creating resource group"
-    az group create -n $ResourceGroupName -l $Location --tags $Tagname=$tagvalue -o none
+    az group create,
+        --name $ResourceGroupName,
+        --location $Location,
+        --tags $Tagname=$tagvalue,
+        --output none
 }
